@@ -32,7 +32,9 @@ export const fetchPokemonDetails = createAsyncThunk<PokemonDetails, string>(
       name: response.data.name,
       height: response.data.height,
       image: response.data.sprites.front_default,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       abilities: response.data.abilities.map((a: any) => a.ability.name),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       stats: response.data.stats.map((s: any) => ({
         name: s.stat.name,
         value: s.base_stat
@@ -50,6 +52,7 @@ const pokemonSlice = createSlice({
       error: null as string | null,
       page: 1,
       pokedex: [] as Pokemon[],
+      pokemonDetails: null as PokemonDetails | null,
     },
     reducers: {
         addToPokedex: (state, action: PayloadAction<Pokemon>) => {
